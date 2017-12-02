@@ -74,7 +74,7 @@ public class PedidoDAO implements DAO<Pedido>{
 		}
 		try {
 			Query query = manager
-					.createQuery("Select u from Pedido where u.emissao >= :pldtime1 and u.emissao <= :pldtime2");
+					.createQuery("Select u from Pedido u where u.emissao >= :pldtime1 and u.emissao <= :pldtime2");
 			query.setParameter("pldtime1", ldtime1);
 			query.setParameter("pldtime2", ldtime2);
 			return query.getResultList();
@@ -92,7 +92,7 @@ public class PedidoDAO implements DAO<Pedido>{
 		}
 		try {
 			Query query = manager
-					.createQuery("Select u from Pedido where u.total >= :ptotal1 and u.total <= :ptotal2");
+					.createQuery("Select u from Pedido u where u.total >= :ptotal1 and u.total <= :ptotal2");
 			query.setParameter("ptotal1", total1);
 			query.setParameter("ptotal2", total2);
 			return query.getResultList();

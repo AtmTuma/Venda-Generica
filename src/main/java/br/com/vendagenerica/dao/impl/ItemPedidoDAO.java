@@ -35,7 +35,7 @@ public class ItemPedidoDAO implements DAO<ItemPedido>{
 
 	public ItemPedido findById(UUID id) throws ErroSistema {
 		try {
-			Query query = manager.createQuery("Select u from Pedido u where u.id = :pid");
+			Query query = manager.createQuery("Select u from ItemPedido u where u.id = :pid");
 			query.setParameter("pid", id);
 			return (ItemPedido) query.getSingleResult();
 		} catch (HibernateException ex) {
@@ -64,7 +64,7 @@ public class ItemPedidoDAO implements DAO<ItemPedido>{
 		}
 		try {
 			Query query = manager
-					.createQuery("Select u from ItemPedido where u.total >= :pamount1 and u.total <= :pamount2");
+					.createQuery("Select u from ItemPedido u where u.quantidade >= :pamount1 and u.quantidade <= :pamount2");
 			query.setParameter("pamount1", amount1);
 			query.setParameter("pamount2", amount2);
 			return query.getResultList();
@@ -82,9 +82,9 @@ public class ItemPedidoDAO implements DAO<ItemPedido>{
 		}
 		try {
 			Query query = manager
-					.createQuery("Select u from ItemPedido where u.total >= :ptotal1 and u.total <= :ptotal2");
-			query.setParameter("ptotal1", price1);
-			query.setParameter("ptotal2", price2);
+					.createQuery("Select u from ItemPedido u where u.precounitario >= :pprice1 and u.precounitario <= :pprice2");
+			query.setParameter("pprice1", price1);
+			query.setParameter("pprice2", price2);
 			return query.getResultList();
 		} catch (HibernateException ex) {
 			throw new ErroSistema("Erro ao tentar buscar item do pedido pelo intervalo de preços", ex);
@@ -100,9 +100,9 @@ public class ItemPedidoDAO implements DAO<ItemPedido>{
 		}
 		try {
 			Query query = manager
-					.createQuery("Select u from ItemPedido where u.total >= :ptotal1 and u.total <= :ptotal2");
-			query.setParameter("ptotal1", discount1);
-			query.setParameter("ptotal2", discount2);
+					.createQuery("Select u from ItemPedido u where u.desconto >= :pdiscount1 and u.desconto <= :pdiscount2");
+			query.setParameter("pdisocunt1", discount1);
+			query.setParameter("pdiscount2", discount2);
 			return query.getResultList();
 		} catch (HibernateException ex) {
 			throw new ErroSistema("Erro ao tentar buscar item do pedido pelo intervalo de descontos", ex);
@@ -118,7 +118,7 @@ public class ItemPedidoDAO implements DAO<ItemPedido>{
 		}
 		try {
 			Query query = manager
-					.createQuery("Select u from ItemPedido where u.total >= :ptotal1 and u.total <= :ptotal2");
+					.createQuery("Select u from ItemPedido u where u.total >= :ptotal1 and u.total <= :ptotal2");
 			query.setParameter("ptotal1", total1);
 			query.setParameter("ptotal2", total2);
 			return query.getResultList();
