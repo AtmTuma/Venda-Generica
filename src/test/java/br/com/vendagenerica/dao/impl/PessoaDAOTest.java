@@ -18,7 +18,7 @@ public class PessoaDAOTest extends AbstractTestCase{
 	@Before
 	public void init() throws ErroSistema {
 		try {
-			dao = new PessoaDAO(manager);
+			dao = new PessoaDAO(manager); 
 		} catch (Exception ex) {
 			throw new ErroSistema("Erro no persistencer ", ex);
 		}
@@ -28,7 +28,7 @@ public class PessoaDAOTest extends AbstractTestCase{
 	@Test
     public void findAllTest() throws ErroSistema {
 		
-		/*Query queryPessoa = manager.createNativeQuery("DELETE FROM PESSOA");
+		Query queryPessoa = manager.createNativeQuery("DELETE FROM PESSOA");
         queryPessoa.executeUpdate();
         Assert.assertTrue(dao.findAll().size() == 0);
         
@@ -36,6 +36,6 @@ public class PessoaDAOTest extends AbstractTestCase{
 		pessoa.setNome("Pessoa");
 		pessoa.setDataNascimento(LocalDate.of(1991, 8, 27));
 		manager.persist(pessoa);
-		Assert.assertTrue(dao.findAll().size() == 0);*/
+		Assert.assertTrue(dao.findAll().size() == 0);
 	}
 }

@@ -31,7 +31,7 @@ public class Produto implements Serializable{
 	private String codigo;
 	@Column(nullable = false, length = 50)
 	private String nome;
-	@Column(nullable = false)
+	@Column(name = "precounitario", nullable = false)
 	private Double precoUnitario;
 	
 	@OneToMany(mappedBy="produto", targetEntity = ItemPedido.class,fetch=FetchType.LAZY)
