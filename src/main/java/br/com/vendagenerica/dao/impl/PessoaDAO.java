@@ -15,15 +15,15 @@ import br.com.vendagenerica.model.Pessoa;
 import br.com.vendagenerica.dao.DAO;
 import br.com.vendagenerica.dao.Transactional;
 
-public class PessoaDAO implements DAO<Pessoa>{
+public class PessoaDAO implements DAO<Pessoa> {
 
 	private EntityManager manager;
 
 	@Inject
-	public PessoaDAO (EntityManager manager) {
+	public PessoaDAO(EntityManager manager) {
 		this.manager = manager;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public List<Pessoa> findAll() throws ErroSistema {
 		try {
@@ -46,27 +46,25 @@ public class PessoaDAO implements DAO<Pessoa>{
 	@SuppressWarnings("unchecked")
 	public List<Pessoa> findByName(String name) throws ErroSistema {
 		try {
-			Query query = manager
-					.createQuery("Select u from Pessoa u where upper(u.nome) like :pnome");
+			Query query = manager.createQuery("Select u from Pessoa u where upper(u.nome) like :pnome");
 			query.setParameter("pnome", "%" + name.toUpperCase() + "%");
 			return query.getResultList();
 		} catch (HibernateException ex) {
 			throw new ErroSistema("Erro ao tentar buscar pessoa por nome", ex);
 		}
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public List<Pessoa> findByBirthDate(Date birth) throws ErroSistema {
 		try {
-			Query query = manager
-					.createQuery("Select u from Pessoa u where u.datanascimento = :pdata");
+			Query query = manager.createQuery("Select u from Pessoa u where u.datanascimento = :pdata");
 			query.setParameter("pdata", birth);
 			return query.getResultList();
 		} catch (HibernateException ex) {
 			throw new ErroSistema("Erro ao tentar buscar pessoa por data de nascimento", ex);
 		}
 	}
-	
+
 	@Transactional
 	public boolean save(Pessoa t) throws ErroSistema {
 		try {
@@ -80,7 +78,7 @@ public class PessoaDAO implements DAO<Pessoa>{
 		}
 		return true;
 	}
-	
+
 	@Transactional
 	public boolean delete(Pessoa t) throws ErroSistema {
 		try {

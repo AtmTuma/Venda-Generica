@@ -126,6 +126,18 @@ public class ItemPedidoDAO implements DAO<ItemPedido>{
 			throw new ErroSistema("Erro ao tentar buscar item do pedido pelo intervalo de totais", ex);
 		}
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<ItemPedido> findByPedido(UUID pedido) throws ErroSistema {
+		try {
+			Query query = manager
+					.createQuery("Select u from ItemPedido u inner join u.pedido l where l.id = :pID");
+			query.setParameter("pID", pedido);
+			return query.getResultList();
+		} catch (HibernateException ex) {
+			throw new ErroSistema("Erro ao tentar buscar item do pedido por nome do produto", ex);
+		}
+	}
 
 	@Transactional
 	public boolean save(ItemPedido t) throws ErroSistema {
