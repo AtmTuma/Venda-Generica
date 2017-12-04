@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="template.xhtml">
+	<ui:define name="content">
+
+		<h:form>
+			<p:fieldset>
+				<p:panelGrid columns="2">
+					<h:outputLabel for="proCode" value="Código" />
+					<p:inputText id="proCode" value="#{produtoBean.entidade.codigo}" />
+					<h:outputLabel for="proNome" value="Nome" />
+					<p:inputText id="proNome" value="#{produtoBean.entidade.nome}" />
+					<h:outputLabel for="proPreco" value="Preço Unitario" />
+					<p:inputText id="proPreco"
+						value="#{produtoBean.entidade.precoUnitario}">
+					</p:inputText>
+				</p:panelGrid>
+			</p:fieldset>
+
+			<p:toolbar>
+				<p:toolbarGroup align="right">
+					<p:commandButton value="Novo" action="#{produtoBean.novo()}"
+						update="@form" />
+					<p:commandButton value="Salvar" action="#{produtoBean.cadastrar()}"
+						update="@form" />
+					<p:commandButton value="Buscar" action="#{produtoBean.listar()}"
+						update="@form" />
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<p:messages autoUpdate="true" showDetail="true" />
+
+			<p:fieldset>
+				<p:dataTable value="#{produtoBean.entidades}" var="produto">
+					<p:column>
+						<p:commandButton value="Editar"
+							action="#{produtoBean.editar(produto)}" update="@form" />
+						<p:commandButton value="Deletar"
+							action="#{produtoBean.deletar(produto)}" update="@form" />
+					</p:column>
+					<p:column headerText="Código" sortBy="#{produto.codigo}">
+						<h:outputText value="#{produto.codigo}" />
+					</p:column>
+					<p:column headerText="Nome" sortBy="#{produto.nome}">
+						<h:outputText value="#{produto.nome}" />
+					</p:column>
+					<p:column headerText="Preço Unitario"
+						sortBy="#{produto.precoUnitario}">
+						<h:outputText value="#{produto.precoUnitario}" />
+					</p:column>
+				</p:dataTable>
+			</p:fieldset>
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+
+</html>

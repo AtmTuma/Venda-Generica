@@ -5,8 +5,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.ws.rs.WebApplicationException;
 
@@ -18,6 +21,9 @@ import br.com.vendagenerica.model.Pedido;
 import br.com.vendagenerica.service.PedidoService;
 import br.com.vendagenerica.service.Service;
 
+@RequestScoped
+@ManagedBean(name = "pedidoBean")
+@Named
 public class PedidoBEAN extends BEAN<Pedido, PedidoDAO>{
 
 	private EntityManager manager;

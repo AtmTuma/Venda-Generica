@@ -67,6 +67,16 @@ public abstract class BEAN<E, D extends DAO<E>>{
 		}
 	}
 	
+	public void editar(E entidade) {
+		try {
+			getDAO().save(entidade);
+			adicionarMensagem("Salvo com sucesso!", FacesMessage.SEVERITY_INFO);
+		} catch (ErroSistema ex) {
+			Logger.getLogger(BEAN.class.getName()).log(Level.SEVERE, null, ex);
+			adicionarMensagem(ex.getMessage(), FacesMessage.SEVERITY_ERROR);
+		}
+	}
+	
 	public void excluir(E entidade){
         try {
             getDAO().delete(entidade);

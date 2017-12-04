@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="template.xhtml">
+	<ui:define name="content">
+
+		<h:form>
+			<p:fieldset>
+				<p:panelGrid columns="2">
+					<h:outputLabel for="pesNome" value="Nome" />
+					<p:inputText id="pesNome" value="#{pessoaBean.entidade.nome}" />
+					<h:outputLabel for="pesNasc" value="Data inicial" />
+					<p:calendar id="pesNasc"
+						value="#{pessoaBean.entidade.dataNascimento}" showOn="button"
+						pattern="dd/MM/yyyy">
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</p:calendar>
+				</p:panelGrid>
+			</p:fieldset>
+			<p:toolbar>
+				<p:toolbarGroup align="right">
+					<p:commandButton value="Novo" action="#{pessoaBean.novo()}"
+						update="@form" />
+					<p:commandButton value="Salvar" action="#{pessoaBean.cadastrar()}"
+						update="@form" />
+					<p:commandButton value="Buscar" action="#{pessoaBean.listar()}"
+						update="@form" />
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<p:messages autoUpdate="true" showDetail="true" />
+
+			<p:fieldset>
+				<p:dataTable value="#{pessoaBean.entidades}" var="pessoa">
+					<p:column>
+						<p:commandButton value="Editar"
+							action="#{pessoaBean.editar(pessoa)}" update="@form" />
+						<p:commandButton value="Deletar"
+							action="#{pessoaBean.deletar(pessoa)}" update="@form" />
+					</p:column>
+					<p:column headerText="Nome" sortBy="#{pessoa.nome}">
+						<h:outputText value="#{pessoa.nome}" />
+					</p:column>
+					<p:column headerText="Data Nascimento"
+						sortBy="#{pessoa.dataNascimento}">
+						<h:outputText value="#{pessoa.dataNascimento}">
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+						</h:outputText>
+					</p:column>
+				</p:dataTable>
+			</p:fieldset>
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+
+</html>
